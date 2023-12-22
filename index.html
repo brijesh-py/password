@@ -1,24 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body>
-    <div class="container-fluid">
-      <h2>Secure Password Generator</h2>
-      <div class="container">
-        <input type="range" id="range" value="8" min="8" max="50" />
-        <div class="d-flex">
-          <input type="text" readonly id="password" />
-          <ion-icon id="copy-password" name="copy-outline"></ion-icon>
+  <body class="bg-success">
+    <nav class="navbar shadow position-fixed top-0 w-100 bg-white">
+        <div class="container-fluid ">
+            <a href="" class="text-decoration-none mx-auto fw-bold  display-5 text-black">
+                Secure Password
+            </a>
         </div>
-        <button class="btn">Generate</button>
+    </nav>
+    <div
+      class="container-fluid w-100 d-flex justify-content-center align-items-center"
+    >
+      <div class="p-2 border rounded border-light shadow">
+        <div class="text-white">
+          <div
+            class="d-flex align-items-center justify-content-between container input-group border p-1 rounded"
+          >
+            <input
+              type="text"
+              readonly
+              class="form-control password__show"
+              placeholder="Password"
+              title="Password Show" 
+            />
+            <div class="btn-group">
+              <ion-icon
+                class="btn text-light border-0 password__copy__btn"
+                name="copy-outline"
+                title="Copy Password" 
+              ></ion-icon>
+              <ion-icon
+              title="Password Generate" 
+                name="refresh-outline"
+                class="btn border-0 text-light password__generate__btn"
+              ></ion-icon>
+            </div>
+          </div>
+          <div class="p-2 border mt-2 rounded password__secure__check">
+            <div class="mb-2 d-flex align-items-center" title="Validate Password">
+             <span class="me-2 display-3">
+                <ion-icon
+                name="shield-checkmark-outline"
+              ></ion-icon>
+             </span>
+              <b>Strong Password</b>
+            </div>
+            <div class="mb-2">
+              <label for="password__length" title="Password Length" 
+                >Password Length
+                <b class="password__length__show">(20)</b></label
+              >
+              <input id="password__length__range" value="12" max="60" min="3" type="range" class="form-range" title="Password Length" />
+            </div>
+            <div class="mb-2">
+              <input
+                id="password__number" checked
+                type="checkbox"
+                class="form-check-input me-2"
+                title="Include Number"
+              />
+              <label for="password__number" title="Include Number">Include Number (e.g. 123)</label>
+            </div>
+            <div class="mb-2">
+              <input checked
+                id="password__characters__lowercase"
+                type="checkbox"
+                class="form-check-input me-2"
+                title="Include Lowercase"
+              />
+              <label for="password__characters__lowercase" title="Include Lowercase"
+                >Include Characters Lowercase (e.g. qwt)</label
+              >
+            </div>
+            <div class="mb-2">
+              <input checked
+                id="password__characters__uppercase"
+                type="checkbox"
+                class="form-check-input me-2"
+                title="Include Uppercase"
+              />
+              <label for="password__characters__uppercase" title="Include Uppercase"
+                >Include Characters Uppercase (e.g. GRT)</label
+              >
+            </div>
+            <div class="mb-2">
+              <input checked
+                id="password__symbols"
+                type="checkbox"
+                class="form-check-input me-2"
+                title="Include Symbols"
+              />
+              <label for="password__symbols" title="Include Symbols"
+                >Include Symbols (e.g. @#$)</label
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- js -->
+    <footer class="p-3 bg-white shadow position-fixed bottom-0 w-100">
+        <div class="text-center mx-auto">
+            <span class="text-center ">Developed By <a href="https://github.com/brijesh-py" class="text-decoration-none fw-bolder  text-dark">github.com/brijesh-py</a></span>
+        </div>
+    </footer>
+<script src="./index.js" defer></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -27,6 +124,5 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-    <script src="index.js" defer></script>
   </body>
 </html>
