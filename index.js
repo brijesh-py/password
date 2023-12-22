@@ -1,7 +1,7 @@
 //  selectors
 let btn = document.querySelector(".btn");
 let password_output = document.querySelector("#password");
-let charactors = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&*()_-+=|?{[]}`;
+let charactors = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@#$%&`;
 let password_range = document.querySelector("#range");
 const copy_password = document.querySelector("#copy-password");
 let length = 8;
@@ -14,7 +14,7 @@ const generatePassword = () => {
     }
     password_output.value = temp;
 } 
-// first time auto generate
+// auto-generate
 generatePassword();
 
 // generate button
