@@ -1,35 +1,84 @@
-//  selectors
-let btn = document.querySelector(".btn");
-let password_output = document.querySelector("#password");
-let charactors = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890@#$%&`;
-let password_range = document.querySelector("#range");
-const copy_password = document.querySelector("#copy-password");
-let length = 8;
+const passwordShow = document.querySelector('.password__show');
+const passwordGenerateBtn = document.querySelector('.password__generate__btn');
+const passwordCopyBtn = document.querySelector('.password__copy__btn');
+const passwordSecureCheck = document.querySelector('.password__secure__check');
+const passwordLengthRange = document.querySelector('#password__length__range');
+const passwordLengthShow = document.querySelector(".password__length__show");
+const passwordNumber = document.querySelector('#password__number');
+const passwordSymbols = document.querySelector('#password__symbols');
+const passwordLowercase = document.querySelector('#password__characters__lowercase');
+const passwordUppercase = document.querySelector('#password__characters__uppercase');
+let passwordLength=8;
 
-// generator password function
-const generatePassword = () => {
-    let temp = ''
-    for(let x = 1; x <= length; x++){
-        temp += charactors[Math.floor(Math.random()*charactors.length)];
+const validateToPasswordIsSecure = () => {
+    if(passwordLength < 8){
+        passwordSecureCheck.querySelector('span ion-icon').name = 'shield-outline'
+        passwordSecureCheck.querySelector('span').setAttribute('class','text-danger me-2 display-3')
+        passwordSecureCheck.querySelector('b').innerText = "Failed Password";
+        document.body.setAttribute('class','bg-danger');
+    }else if(passwordLength < 12){
+        passwordSecureCheck.querySelector('span ion-icon').name = 'shield-half-outline'
+        passwordSecureCheck.querySelector('span').setAttribute('class','text-warning me-2 display-3')
+        passwordSecureCheck.querySelector('b').innerText = "Medium Password";
+        document.body.setAttribute('class','bg-warning');
+    }else if(passwordLength < 60){
+        passwordSecureCheck.querySelector('span ion-icon').name = 'shield-checkmark-outline'
+        passwordSecureCheck.querySelector('span').setAttribute('class','text-success me-2 display-3')
+        passwordSecureCheck.querySelector('b').innerText = "Secure Password";
+        document.body.setAttribute('class','bg-success');
     }
-    password_output.value = temp;
-} 
-// auto-generate
-generatePassword();
+}
 
-// generate button
-btn.addEventListener("click",() => {
-    generatePassword();
-});
+const passwordGenerate = () =>{
+    const number = '1234567890';
+    const lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
+    const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const symbols = "@#$%&+=-_?";
+    let tempCharacters = "";
+    if(passwordNumber.checked == true) tempCharacters += number;
+    if(passwordLowercase.checked == true) tempCharacters += lowercaseCharacters;
+    if(passwordUppercase.checked == true) tempCharacters += uppercaseCharacters;
+    if(passwordSymbols.checked == true) tempCharacters += symbols;
+    let tempPassword = "";
+    if(tempCharacters && passwordLength != undefined && passwordNumber.checked || passwordUppercase.checked || passwordLowercase.checked || passwordSymbols.checked){
+        for(let x=1;x<=passwordLength;x++){
+            tempPassword += tempCharacters[Math.floor(Math.random()*tempCharacters.length)]; 
+        }
+        passwordShow.value = tempPassword;
+    }
+    tempCharacters = "";
+    passwordLengthShow.innerText = `(${passwordLength})`;
+    validateToPasswordIsSecure();
+}
+passwordGenerate();
 
-// length of passowrd
-password_range.addEventListener("input",() => {
-    length = password_range.value;
-    generatePassword();
+passwordLengthRange.addEventListener('input',(e)=>{
+    passwordLength = e.target.value;
+    passwordGenerate();
 })
 
-// copy password
-copy_password.addEventListener("click",() => {
-    password_output.select()
-    navigator.clipboard.writeText(password_output.value)
+passwordGenerateBtn.addEventListener('click',()=>{
+    passwordGenerate()
+})
+
+passwordNumber.addEventListener('change',()=>{
+    passwordGenerate();
+})
+
+passwordSymbols.addEventListener('change',()=>{
+    passwordGenerate();
+})
+
+passwordLowercase.addEventListener('change',()=>{
+    passwordGenerate();
+})
+
+passwordUppercase.addEventListener('change',()=>{
+    passwordGenerate();
+})
+
+
+passwordCopyBtn.addEventListener('click',()=>{
+    passwordShow.select()
+    document.execCommand("copy")
 })
